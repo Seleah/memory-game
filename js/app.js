@@ -2,9 +2,7 @@
  * Create a nodeList that holds all of your cards
  */
 let cardsList = document.querySelectorAll('.card');
-
-let cardsArray = []
-
+let cardsArray = [];
 var tmpElement = document.createElement("div");
 
 for (var i = 0; i < cardsList.length; i++) {
@@ -14,33 +12,7 @@ for (var i = 0; i < cardsList.length; i++) {
     tmpElement.innerHTML = '';
 }
 
-
 console.log(cardsArray);
-
-
-
-
-
-
-
-// let cardsArray = [];
-
-// cardsList.forEach(function(card) {
-//     console.log(card);
-//     console.log(card.typeof);
-// });
-
-// for (let i = 0; i < cardsList.length; i++) {
-//     cardsArray.push(cardsArray[i].value);
-// }
-
-// for (let each in cardsList.values()) {
-//     console.log(each);
-// }
-
-// var cardsArray = [].concat(cardsList);
-
-// console.log(cardsArray);
 
 /*
  * Display the cards on the page
