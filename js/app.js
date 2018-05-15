@@ -2,17 +2,6 @@
  * Create a nodeList that holds all of your cards
  */
 let cardsList = document.querySelectorAll('.card');
-let cardsArray = [];
-var tmpElement = document.createElement("div");
-
-for (var i = 0; i < cardsList.length; i++) {
-    var card = cardsList[i];
-    tmpElement.appendChild(card);
-    cardsArray.push(tmpElement.innerHTML);
-    tmpElement.innerHTML = '';
-}
-
-console.log(cardsArray);
 
 /*
  * Display the cards on the page
@@ -20,21 +9,21 @@ console.log(cardsArray);
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
-function displayCards(array) {
+function displayRandomCards() {
+    
+    let cardsArray = [];
+    var tmpElement = document.createElement("div");
+    
+    for (var i = 0; i < cardsList.length; i++) {
+        var card = cardsList[i];
+        tmpElement.appendChild(card);
+        cardsArray.push(tmpElement.innerHTML);
+        tmpElement.innerHTML = '';
+    }
     
     let cardDeck = document.getElementById('deckOfCards');
     
-    // const fragment = document.createDocumentFragment();  // ← uses a DocumentFragment instead of a <div>
-
-    // for (let i = 0; i < 200; i++) {
-    //     const newElement = document.createElement('p');
-    //     newElement.innerText = 'This is paragraph number ' + i;
-    
-    //     fragment.appendChild(newElement);
-    // }
-    
     cardDeck.innerHTML = shuffle(cardsArray).join('');
-    // console.log(cardDeck.innerHTML);
     
 }
 
@@ -55,7 +44,7 @@ function shuffle(array) {
     return array;
 }
 
-displayCards(cardsList);
+displayRandomCards(cardsList);
 
 
 
