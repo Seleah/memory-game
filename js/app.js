@@ -3,13 +3,44 @@
  */
 let cardsList = document.querySelectorAll('.card');
 
-let cardsArray = [];
+let cardsArray = []
 
-cardsList.forEach(function(card) {
-    cardsArray.push(card);
-})
+var tmpElement = document.createElement("div");
+
+for (var i = 0; i < cardsList.length; i++) {
+    var card = cardsList[i];
+    tmpElement.appendChild(card);
+    cardsArray.push(tmpElement.innerHTML);
+    tmpElement.innerHTML = '';
+}
+
 
 console.log(cardsArray);
+
+
+
+
+
+
+
+// let cardsArray = [];
+
+// cardsList.forEach(function(card) {
+//     console.log(card);
+//     console.log(card.typeof);
+// });
+
+// for (let i = 0; i < cardsList.length; i++) {
+//     cardsArray.push(cardsArray[i].value);
+// }
+
+// for (let each in cardsList.values()) {
+//     console.log(each);
+// }
+
+// var cardsArray = [].concat(cardsList);
+
+// console.log(cardsArray);
 
 /*
  * Display the cards on the page
@@ -21,9 +52,16 @@ function displayCards(array) {
     
     let cardDeck = document.getElementById('deckOfCards');
     
+    // const fragment = document.createDocumentFragment();  // ← uses a DocumentFragment instead of a <div>
+
+    // for (let i = 0; i < 200; i++) {
+    //     const newElement = document.createElement('p');
+    //     newElement.innerText = 'This is paragraph number ' + i;
     
+    //     fragment.appendChild(newElement);
+    // }
     
-    cardDeck.innerHTML = shuffle(cardsList);
+    cardDeck.innerHTML = shuffle(cardsArray).join('');
     // console.log(cardDeck.innerHTML);
     
 }
@@ -40,7 +78,7 @@ function shuffle(array) {
         array[randomIndex] = temporaryValue;
     }
 
-    console.log(array.length);
+    console.log(array);
     
     return array;
 }
