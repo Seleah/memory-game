@@ -67,9 +67,11 @@ h1 {
 
 .card {
     height: 125px;
+    width: 125px;
     transform-style: preserve-3d;
     transition: transform 1s ease-in-out;
-    width: 125px;
+    border-radius: 6px;
+    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
 }
 
 .flipped {
@@ -79,12 +81,12 @@ h1 {
 
 .card .side {
     backface-visibility: hidden;
-    border-radius: 6px;
     height: 100%;
+    width: 100%;
     background-color: #2e3d49;
+    border-radius: inherit;
     color: white;
     position: absolute;
-    width: 100%;
 }
 .card .back {
     background: #02b3e4;
