@@ -60,9 +60,14 @@ displayRandomCards(cardsList);
 let deck = document.body.querySelector('.deck');
 
 deck.addEventListener('click', function(e) {
-    // prevent entire deck from flipping
+    // ensure proper flipping of entire card, but not just a side
     if (e.target != deck) {
-        let card = e.target;
-        card.parentNode.classList.toggle('flipped');
+        if (e.target.classList.contains('fa')) {
+            let side = e.target.parentNode;
+            side.parentNode.classList.toggle('flipped');
+        } else {
+            let side = e.target;
+            side.parentNode.classList.toggle('flipped');
+        }
     }
 });
