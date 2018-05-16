@@ -56,10 +56,13 @@ displayRandomCards(cardsList);
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
- 
-//  let flipClasses = ['open', 'show'];
- 
- cardDeck.addEventListener('click', function(e) {
-     e.target.classList.toggle('open');
-     e.target.classList.toggle('show');
- });
+
+let deck = document.body.querySelector('.deck');
+
+deck.addEventListener('click', function(e) {
+    // prevent entire deck from flipping
+    if (e.target != deck) {
+        let card = e.target;
+        card.parentNode.classList.toggle('flipped');
+    }
+});
