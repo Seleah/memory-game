@@ -2,6 +2,7 @@
  * Create a nodeList that holds all of your cards
  */
 let cardsList = document.querySelectorAll('.card');
+let cardDeck = document.getElementById('deckOfCards');
 
 /*
  * Display the cards on the page
@@ -20,8 +21,6 @@ function displayRandomCards() {
         cardsArray.push(tmpElement.innerHTML);
         tmpElement.innerHTML = '';
     }
-    
-    let cardDeck = document.getElementById('deckOfCards');
     
     cardDeck.innerHTML = shuffle(cardsArray).join('');
     
@@ -47,8 +46,6 @@ function shuffle(array) {
 displayRandomCards(cardsList);
 
 
-
-
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
@@ -59,3 +56,10 @@ displayRandomCards(cardsList);
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+ 
+//  let flipClasses = ['open', 'show'];
+ 
+ cardDeck.addEventListener('click', function(e) {
+     e.target.classList.toggle('open');
+     e.target.classList.toggle('show');
+ });
