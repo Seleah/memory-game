@@ -51,17 +51,60 @@ h1 {
     margin: 0 0 3em;
 }
 
+.deck-container {
+    flex-direction: row;
+    justify-content: center;
+}
+
+.card-space {
+    cursor: pointer;
+    height: 150px;
+    perspective: 600;
+    position: relative;
+    width: 150px;
+    margin: 20px;
+    display: flex;
+}
+
+.card {
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 1s ease-in-out;
+    width: 100%;
+}
+
+.flipped {
+    transform: rotateY(180deg);
+    cursor: default;
+}
+
+.card .side {
+    backface-visibility: hidden;
+    border-radius: 6px;
+    height: 100%;
+    background-color: #2e3d49;
+    color: white;
+    position: absolute;
+    width: 100%;
+}
+.card .back {
+    background: #02b3e4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 33px;
+    color: #fff;
+    transform: rotateY(180deg);
+}
+
 .deck .card {
     height: 125px;
     width: 125px;
-    background: #2e3d49;
+    /*background: #2e3d49;*/
     font-size: 0;
     color: #ffffff;
     border-radius: 8px;
     cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
     /*transition: transform 1s;*/
     /*transition-duration: 2s;*/
@@ -75,7 +118,7 @@ h1 {
     transform: rotateY(180deg);
     -webkit-transform: rotateY(180deg);   /* Chrome */
     
-    cursor: default;
+    
 }
 
 .deck .card.show {
