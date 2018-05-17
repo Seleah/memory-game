@@ -84,25 +84,49 @@ function displaySymbol(elementClicked) {
         let symbol = elementClicked.nextElementSibling.firstElementChild;
         let icon = ('.' + symbol.classList[1]);
         // console.log(icon);
-        addSymbol(icon);
+        return icon;
     }
 }
 
 function addSymbol(icon) {
-    if (openCards.includes(icon)) {
-        let matchedCards = document.querySelectorAll(icon);
-        matchedCards.forEach(function(element) {
-            element.parentNode.classList.add('match');
-        });
-    }
     openCards.push(icon);
-    console.log(openCards);
+    // console.log(openCards, icon);
+    return openCards;
+}
+
+function isMatch(list) {
+    // Isolate the last card in the list. It is the most recent
+    let newCard = list.slice(-1)[0];
+    // check to see if a similar card has already been revealed
+    for (let i in list.slice(0, -1)){
+        if (list.slice(2, )[i] == newCard) {
+            // Select all of the cards with the same symbol on them
+            let matchedCards = document.querySelectorAll(newCard);
+            // Add class match to indicate they have been matched
+            matchedCards.forEach(function(element) {
+                element.parentNode.classList.add('match');
+            });
+            return true;
+        }
+    }
+    return false;
 }
 
 deck.addEventListener('click', function(e) {
     // Check to make sure the symbol is still hidden. If it is showing, the user
     // should not be able to turn the card back over on their own.
     if (!(e.target.classList.contains('back') || (e.target.parentNode.classList.contains('back')))) {
-        displaySymbol(e.target);
+        let symbol = displaySymbol(e.target);
+        let list = (addSymbol(symbol));
+        // check the length of the list. If it is even, two are recently revealed
+        // and one or more matches are showing
+        if (list.length % 2 ==0) {
+            // If the last two cards don't match...
+            if (!(isMatch(list))) {
+                
+            } else {
+                
+            }
+        }
     }
 });
