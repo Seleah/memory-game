@@ -76,23 +76,15 @@ let deck = document.body.querySelector('.deck');
 let openCards = []
 
 function displaySymbol(elementClicked) {
-    // ensure proper flipping of entire card, but not just a side
-    if (elementClicked != deck) {
-        // if you click on the icon, go up one node to flip the card
-        if (elementClicked.classList.contains('fa')) {
-            let side = elementClicked.parentNode;
-            side.parentNode.classList.toggle('flipped');
-            
-        } else {
-            elementClicked.parentNode.classList.toggle('flipped');
-            
-            if (elementClicked.parentNode.classList.contains('flipped')) {
-                let symbol = elementClicked.nextElementSibling.firstElementChild;
-                let icon = ('.' + symbol.classList[1]);
-                console.log(icon);
-                addSymbol(icon);
-            }
-        }
+    // make sure you're only flipping a card, nothing else
+    // (apparently it's possible to flip the entire game...)
+    if (elementClicked.classList.contains('side')) {
+        let card = elementClicked.parentNode;
+        card.classList.add('flipped');
+        let symbol = elementClicked.nextElementSibling.firstElementChild;
+        let icon = ('.' + symbol.classList[1]);
+        // console.log(icon);
+        addSymbol(icon);
     }
 }
 
@@ -109,7 +101,7 @@ function addSymbol(icon) {
 
 deck.addEventListener('click', function(e) {
     // Check to make sure the symbol is still hidden. If it is showing, the user
-    // should not be able to turn it back over on their own.
+    // should not be able to turn the card back over on their own.
     if (!(e.target.classList.contains('back') || (e.target.parentNode.classList.contains('back')))) {
         displaySymbol(e.target);
     }
