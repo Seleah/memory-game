@@ -108,5 +108,9 @@ function addSymbol(icon) {
 }
 
 deck.addEventListener('click', function(e) {
-    displaySymbol(e.target);
+    // Check to make sure the symbol is still hidden. If it is showing, the user
+    // should not be able to turn it back over on their own.
+    if (!(e.target.classList.contains('back') || (e.target.parentNode.classList.contains('back')))) {
+        displaySymbol(e.target);
+    }
 });
