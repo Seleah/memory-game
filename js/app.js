@@ -78,25 +78,35 @@ let openCards = []
 function displaySymbol(elementClicked) {
     // ensure proper flipping of entire card, but not just a side
     if (elementClicked != deck) {
-        //if you click on the icon, go up one node to flip the card
+        // if you click on the icon, go up one node to flip the card
         if (elementClicked.classList.contains('fa')) {
             let side = elementClicked.parentNode;
             side.parentNode.classList.toggle('flipped');
             
         } else {
             elementClicked.parentNode.classList.toggle('flipped');
-            console.log(elementClicked.parentNode.classList.contains('flipped'));
             
             if (elementClicked.parentNode.classList.contains('flipped')) {
-                // console.log(elementClicked.nextElementSibling.innerHTML);
-                return elementClicked.nextElementSibling.innerHTML;
+                let symbol = elementClicked.nextElementSibling.firstElementChild;
+                let icon = ('.' + symbol.classList[1]);
+                console.log(icon);
+                addSymbol(icon);
             }
         }
     }
 }
 
+function addSymbol(icon) {
+    if (openCards.includes(icon)) {
+        let matchedCards = document.querySelectorAll(icon);
+        matchedCards.forEach(function(element) {
+            element.parentNode.classList.add('match');
+        });
+    }
+    openCards.push(icon);
+    console.log(openCards);
+}
+
 deck.addEventListener('click', function(e) {
-    
     displaySymbol(e.target);
-    // addOpenCard(displaySymbol(e.target));
 });
