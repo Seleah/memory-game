@@ -112,6 +112,15 @@ function isMatch(list) {
     return false;
 }
 
+function notMatch(list) {
+    for (let j in list.slice(-2)) {
+        let hideCards = document.querySelectorAll(list.slice(-2)[j]);
+        hideCards.forEach(function(el) {
+            el.parentNode.parentNode.classList.remove('flipped');
+        });
+    }
+}
+
 deck.addEventListener('click', function(e) {
     // Check to make sure the symbol is still hidden. If it is showing, the user
     // should not be able to turn the card back over on their own.
@@ -121,10 +130,11 @@ deck.addEventListener('click', function(e) {
         // check the length of the list. If it is even, two are recently revealed
         // and one or more matches are showing
         if (list.length % 2 ==0) {
-            // If the last two cards don't match...
             if (!(isMatch(list))) {
-                
+                // If the last two cards don't match...
+                notMatch(list);
             } else {
+                // If they do, lock the cards in the flipped position
                 
             }
         }
