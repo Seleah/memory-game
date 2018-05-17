@@ -73,16 +73,24 @@ displayRandomCards(cardsList);
  */
 
 let deck = document.body.querySelector('.deck');
+let openCards = []
 
 function displaySymbol(elementClicked) {
     // ensure proper flipping of entire card, but not just a side
     if (elementClicked != deck) {
+        //if you click on the icon, go up one node to flip the card
         if (elementClicked.classList.contains('fa')) {
             let side = elementClicked.parentNode;
             side.parentNode.classList.toggle('flipped');
+            
         } else {
-            let side = elementClicked;
-            side.parentNode.classList.toggle('flipped');
+            elementClicked.parentNode.classList.toggle('flipped');
+            console.log(elementClicked.parentNode.classList.contains('flipped'));
+            
+            if (elementClicked.parentNode.classList.contains('flipped')) {
+                // console.log(elementClicked.nextElementSibling.innerHTML);
+                return elementClicked.nextElementSibling.innerHTML;
+            }
         }
     }
 }
@@ -90,4 +98,5 @@ function displaySymbol(elementClicked) {
 deck.addEventListener('click', function(e) {
     
     displaySymbol(e.target);
+    // addOpenCard(displaySymbol(e.target));
 });
