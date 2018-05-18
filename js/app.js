@@ -124,8 +124,14 @@ function notMatch(list) {
         let hideCards = document.querySelectorAll(list.slice(-2)[j]);
         hideCards.forEach(function(el) {
             el.parentNode.parentNode.classList.remove('flipped');
+            if (openCards.length > 2) {
+                openCards = openCards.slice(0, -2);
+            } else {
+                openCards = [];
+            }
         });
     }
+    return openCards;
 }
 
 
@@ -144,7 +150,7 @@ deck.addEventListener('click', function(e) {
             if (!(isMatch(list))) {
                 // If the last two cards don't match...
                 setTimeout(function() {
-                    notMatch(list);
+                    openCards = notMatch(list);
                 }, 3000);
             } else {
                 // If they do, lock the cards in the flipped position
