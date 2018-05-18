@@ -79,6 +79,11 @@ h1 {
     cursor: default;
 }
 
+.flipped-lock {
+    transform: rotateY(180deg);
+    cursor: default;
+}
+
 .card .side {
     backface-visibility: hidden;
     height: 100%;
