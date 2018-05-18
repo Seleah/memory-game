@@ -84,6 +84,7 @@ function displaySymbol(elementClicked) {
         let symbol = elementClicked.nextElementSibling.firstElementChild;
         let icon = ('.' + symbol.classList[1]);
         // console.log(icon);
+        console.log('displaySymbol ran');
         return icon;
     }
 }
@@ -91,17 +92,22 @@ function displaySymbol(elementClicked) {
 function addSymbol(icon) {
     openCards.push(icon);
     // console.log(openCards, icon);
+    console.log('addSymbol ran');
     return openCards;
 }
 
 function isMatch(list) {
+    console.log('isMatch:');
     // Isolate the last card in the list. It is the most recent
     let newCard = list.slice(-1)[0];
+    console.log('newCard is', newCard);
     // check to see if a similar card has already been revealed
     for (let i in list.slice(0, -1)){
-        if (list.slice(2, )[i] == newCard) {
+        if (list.slice(0, -1)[i] == newCard) {
+            console.log('comparing to', list.slice(0, -1)[i]);
             // Select all of the cards with the same symbol on them
             let matchedCards = document.querySelectorAll(newCard);
+            console.log('matchedCards are', matchedCards);
             // Add class match to indicate they have been matched
             matchedCards.forEach(function(element) {
                 element.parentNode.classList.add('match');
@@ -113,6 +119,7 @@ function isMatch(list) {
 }
 
 function notMatch(list) {
+    console.log('notMatch called');
     for (let j in list.slice(-2)) {
         let hideCards = document.querySelectorAll(list.slice(-2)[j]);
         hideCards.forEach(function(el) {
@@ -121,18 +128,24 @@ function notMatch(list) {
     }
 }
 
+
+
 deck.addEventListener('click', function(e) {
     // Check to make sure the symbol is still hidden. If it is showing, the user
     // should not be able to turn the card back over on their own.
     if (!(e.target.classList.contains('back') || (e.target.parentNode.classList.contains('back')))) {
         let symbol = displaySymbol(e.target);
         let list = (addSymbol(symbol));
+        console.log(list, symbol);
         // check the length of the list. If it is even, two are recently revealed
         // and one or more matches are showing
         if (list.length % 2 ==0) {
+            console.log(list.length);
             if (!(isMatch(list))) {
                 // If the last two cards don't match...
-                notMatch(list);
+                setTimeout(function() {
+                    notMatch(list);
+                }, 3000);
             } else {
                 // If they do, lock the cards in the flipped position
                 
