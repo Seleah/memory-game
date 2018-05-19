@@ -73,7 +73,8 @@ displayRandomCards(cardsList);
  */
 
 let deck = document.body.querySelector('.deck');
-let openCards = []
+let openCards = [];
+let lockedCards = [];
 
 function displaySymbol(elementClicked) {
     // make sure you're only flipping a card, nothing else
@@ -90,6 +91,7 @@ function displaySymbol(elementClicked) {
 }
 
 function addSymbol(icon) {
+    
     openCards.push(icon);
     // console.log(openCards, icon);
     console.log('addSymbol ran');
@@ -97,22 +99,21 @@ function addSymbol(icon) {
 }
 
 function isMatch(list) {
-    console.log('isMatch:');
     // Isolate the last card in the list. It is the most recent
     let newCard = list.slice(-1)[0];
-    console.log('newCard is', newCard);
     // check to see if a similar card has already been revealed
     for (let i in list.slice(0, -1)){
         if (list.slice(0, -1)[i] == newCard) {
-            console.log('comparing to', list.slice(0, -1)[i]);
             // Select all of the cards with the same symbol on them
             let matchedCards = document.querySelectorAll(newCard);
-            console.log('matchedCards are', matchedCards);
             // Add class match to indicate they have been matched
             matchedCards.forEach(function(element) {
                 element.parentNode.classList.add('match');
+                element.parentNode.parentNode.classList.add('flipped-lock');
+                lockedCards.push(newCard);
+                console.log(lockedCards);
             });
-            return true;
+            return lockedCards;
         }
     }
     return false;
@@ -120,41 +121,51 @@ function isMatch(list) {
 
 function notMatch(list) {
     console.log('notMatch called');
-    for (let j in list.slice(-2)) {
-        let hideCards = document.querySelectorAll(list.slice(-2)[j]);
+    // iterate through "list" (openCards)
+    for (let j in list) {
+        // look for all cards in the deck with the symbol of this item in openCards
+        let hideCards = document.querySelectorAll(list[j]);
         hideCards.forEach(function(el) {
-            el.parentNode.parentNode.classList.remove('flipped');
-            if (openCards.length > 2) {
-                openCards = openCards.slice(0, -2);
-            } else {
+            // // check to see if this card has been matched. If not...
+            // if (!(el.classList.contains('match'))) {
+            //     // flip the card back over
+                el.parentNode.parentNode.classList.remove('flipped');
+                // and remove the card from openCards
+                // openCards = openCards.slice(0, j);
                 openCards = [];
-            }
+            // }
         });
     }
     return openCards;
 }
 
 
-
 deck.addEventListener('click', function(e) {
-    // Check to make sure the symbol is still hidden. If it is showing, the user
-    // should not be able to turn the card back over on their own.
-    if (!(e.target.classList.contains('back') || (e.target.parentNode.classList.contains('back')))) {
-        let symbol = displaySymbol(e.target);
-        let list = (addSymbol(symbol));
-        console.log(list, symbol);
-        // check the length of the list. If it is even, two are recently revealed
-        // and one or more matches are showing
-        if (list.length % 2 ==0) {
-            console.log(list.length);
-            if (!(isMatch(list))) {
-                // If the last two cards don't match...
-                setTimeout(function() {
-                    openCards = notMatch(list);
-                }, 3000);
-            } else {
-                // If they do, lock the cards in the flipped position
-                
+    // let countUnmatchedCards = 0;
+    // if (openCards.length != 0) {
+    //     openCards.forEach(function(k) {
+    //         let card = document.querySelectorAll(k);
+    //         if ()
+    //     })
+    // }
+    console.log('eventListener triggered');
+    if (openCards.length < 2 && (!(e.target.classList.contains('deck')))) {
+        // Check to make sure the symbol is still hidden. If it is showing, the user
+        // should not be able to turn the card back over on their own.
+        if (!(e.target.classList.contains('back') || (e.target.parentNode.classList.contains('back')))) {
+            let symbol = displaySymbol(e.target);
+            let list = (addSymbol(symbol));
+            console.log(list);
+            // check the length of the list. If it is two, the openCards need to be matched
+            if (list.length == 2) {
+                if (!(isMatch(list))) {
+                    // If the last two cards don't match...
+                    setTimeout(function() {
+                        openCards = notMatch(list);
+                    }, 750);
+                } else {
+                    // If they do, lock the cards in the flipped position
+                }
             }
         }
     }
