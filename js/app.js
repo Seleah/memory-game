@@ -164,7 +164,7 @@ deck.addEventListener('click', function(e) {
                         openCards = notMatch(list);
                     }, 750);
                 } else {
-                    // If they do, lock the cards in the flipped position
+                    openCards = [];
                 }
             }
         }
