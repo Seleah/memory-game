@@ -67,10 +67,10 @@ displayRandomCards(cardsList);
  *    + If the cards do not match, remove the cards from the list and hide the 
  *      card's symbol (put this functionality in another function that you call 
  *      from this one) 
-  --------------------------------------Done----------------------------------
  *      
  *    + Increment the move counter and display it on the page (put this 
  *      functionality in another function that you call from this one)
+  --------------------------------------Done----------------------------------
  *      
  *    + If all cards have matched, display a message with the final score 
  *      (put this functionality in another function that you call from this one)
@@ -146,12 +146,16 @@ function moveUp(moves) {
     return moves;
 }
 
+function winner(){
+    window.alert('You win!');
+}
+
 
 deck.addEventListener('click', function(e) {
     console.log('eventListener triggered');
     if (openCards.length < 2 && (!(e.target.classList.contains('deck')))) {
         moves = moveUp(moves);
-        counter.textContent = parseInt(moves/2) ;
+        counter.textContent = parseInt(moves/2);
         // Check to make sure the symbol is still hidden. If it is showing, the user
         // should not be able to turn the card back over on their own.
         if (!(e.target.classList.contains('back') || (e.target.parentNode.classList.contains('back')))) {
@@ -167,6 +171,9 @@ deck.addEventListener('click', function(e) {
                     }, 750);
                 } else {
                     openCards = [];
+                    if (lockedCards.length == 16) {
+                        setTimeout(winner, 750);
+                    }
                 }
             }
         }
