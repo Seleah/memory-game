@@ -151,7 +151,7 @@ deck.addEventListener('click', function(e) {
     console.log('eventListener triggered');
     if (openCards.length < 2 && (!(e.target.classList.contains('deck')))) {
         moves = moveUp(moves);
-        counter.textContent = moves;
+        counter.textContent = parseInt(moves/2) ;
         // Check to make sure the symbol is still hidden. If it is showing, the user
         // should not be able to turn the card back over on their own.
         if (!(e.target.classList.contains('back') || (e.target.parentNode.classList.contains('back')))) {
