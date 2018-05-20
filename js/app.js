@@ -84,7 +84,6 @@ function displaySymbol(elementClicked) {
         card.classList.add('flipped');
         let symbol = elementClicked.nextElementSibling.firstElementChild;
         let icon = ('.' + symbol.classList[1]);
-        // console.log(icon);
         console.log('displaySymbol ran');
         return icon;
     }
@@ -93,7 +92,6 @@ function displaySymbol(elementClicked) {
 function addSymbol(icon) {
     
     openCards.push(icon);
-    // console.log(openCards, icon);
     console.log('addSymbol ran');
     return openCards;
 }
@@ -126,28 +124,17 @@ function notMatch(list) {
         // look for all cards in the deck with the symbol of this item in openCards
         let hideCards = document.querySelectorAll(list[j]);
         hideCards.forEach(function(el) {
-            // // check to see if this card has been matched. If not...
-            // if (!(el.classList.contains('match'))) {
-            //     // flip the card back over
-                el.parentNode.parentNode.classList.remove('flipped');
-                // and remove the card from openCards
-                // openCards = openCards.slice(0, j);
-                openCards = [];
-            // }
+            // flip the card back over
+            el.parentNode.parentNode.classList.remove('flipped');
+            // clear the list
+            list = [];
         });
     }
-    return openCards;
+    return list;
 }
 
 
 deck.addEventListener('click', function(e) {
-    // let countUnmatchedCards = 0;
-    // if (openCards.length != 0) {
-    //     openCards.forEach(function(k) {
-    //         let card = document.querySelectorAll(k);
-    //         if ()
-    //     })
-    // }
     console.log('eventListener triggered');
     if (openCards.length < 2 && (!(e.target.classList.contains('deck')))) {
         // Check to make sure the symbol is still hidden. If it is showing, the user
