@@ -3,6 +3,10 @@
  */
 let cardsList = document.querySelectorAll('.card');
 let cardDeck = document.getElementById('deckOfCards');
+let counter = document.getElementById('move-counter');
+let moves = 0;
+
+counter.textContent = moves;
 
 /*
  * Display the cards on the page
@@ -50,8 +54,7 @@ displayRandomCards(cardsList);
  * Set up the event listener for a card. If a card is clicked:
  *
  *  - Display the card's symbol (put this functionality in another function that 
- *    you call from this one) 
-  --------------------------------------Done----------------------------------
+ *    you call from this one)
  *    
  *  - Add the card to a *list* of "open" cards (put this functionality in another
  *    function that you call from this one)
@@ -63,7 +66,8 @@ displayRandomCards(cardsList);
  *      
  *    + If the cards do not match, remove the cards from the list and hide the 
  *      card's symbol (put this functionality in another function that you call 
- *      from this one)
+ *      from this one) 
+  --------------------------------------Done----------------------------------
  *      
  *    + Increment the move counter and display it on the page (put this 
  *      functionality in another function that you call from this one)
@@ -127,16 +131,27 @@ function notMatch(list) {
             // flip the card back over
             el.parentNode.parentNode.classList.remove('flipped');
             // clear the list
-            list = [];
+            openCards = [];
         });
     }
-    return list;
+    return openCards;
+}
+
+function moveUp(moves) {
+    console.log('moveUp called');
+    let counter = document.querySelector('.moves');
+    moves++;
+    console.log('moves:', moves);
+    console.log(counter.textContent);
+    return moves;
 }
 
 
 deck.addEventListener('click', function(e) {
     console.log('eventListener triggered');
     if (openCards.length < 2 && (!(e.target.classList.contains('deck')))) {
+        moves = moveUp(moves);
+        counter.textContent = moves;
         // Check to make sure the symbol is still hidden. If it is showing, the user
         // should not be able to turn the card back over on their own.
         if (!(e.target.classList.contains('back') || (e.target.parentNode.classList.contains('back')))) {
