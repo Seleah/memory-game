@@ -5,6 +5,8 @@ let cardsList = document.querySelectorAll('.card');
 let cardDeck = document.getElementById('deckOfCards');
 let counter = document.getElementById('move-counter');
 let moves = 0;
+let modal = document.querySelector(".modal");
+let closeButton = document.querySelector(".close-button");
 
 counter.textContent = moves;
 
@@ -147,7 +149,16 @@ function moveUp(moves) {
 }
 
 function winner(){
-    window.alert('You win!');
+    let modalMessage = `You won!
+    
+    Your Stats:
+    ${Math.floor(moves/2)} moves`;
+    modal.querySelector('h1').innerText = modalMessage;
+    modalMessage += 
+    modal.classList.toggle("show-modal");
+    closeButton.addEventListener("click", function(event) {
+        modal.classList.remove('show-modal');
+    });
 }
 
 
@@ -155,7 +166,7 @@ deck.addEventListener('click', function(e) {
     console.log('eventListener triggered');
     if (openCards.length < 2 && (!(e.target.classList.contains('deck')))) {
         moves = moveUp(moves);
-        counter.textContent = parseInt(moves/2);
+        counter.textContent = Math.floor(moves/2);
         // Check to make sure the symbol is still hidden. If it is showing, the user
         // should not be able to turn the card back over on their own.
         if (!(e.target.classList.contains('back') || (e.target.parentNode.classList.contains('back')))) {
