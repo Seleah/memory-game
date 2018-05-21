@@ -51,6 +51,19 @@ function shuffle(array) {
 
 displayRandomCards(cardsList);
 
+let startTime = timerStart();
+
+let x = setInterval(function() {
+    let now = new Date().getTime();
+    let timePassed = now - startTime;
+    
+    let minutes = Math.floor((timePassed % (1000 * 60))/ (1000 * 60));
+    let seconds = Math.floor((timePassed % (1000 * 60))/ 1000);
+    
+    document.querySelector('.timer').innerHTML = `${minutes} min, ${seconds} sec`;
+    
+}, 1000)
+
 
 /*
  * Set up the event listener for a card. If a card is clicked:
@@ -93,6 +106,11 @@ function displaySymbol(elementClicked) {
         console.log('displaySymbol ran');
         return icon;
     }
+}
+
+function timerStart() {
+    let start = new Date().getTime();
+    return start;
 }
 
 function addSymbol(icon) {
