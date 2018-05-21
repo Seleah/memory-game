@@ -57,7 +57,7 @@ let x = setInterval(function() {
     let now = new Date().getTime();
     let timePassed = now - startTime;
     
-    let minutes = Math.floor((timePassed % (1000 * 60))/ (1000 * 60));
+    let minutes = Math.floor((timePassed % (1000 * 60 * 60))/ (1000 * 60));
     let seconds = Math.floor((timePassed % (1000 * 60))/ 1000);
     
     document.querySelector('.timer').innerHTML = `${minutes} min, ${seconds} sec`;
