@@ -190,26 +190,31 @@ function winner(){
 
 deck.addEventListener('click', function(e) {
     console.log('eventListener triggered');
-    if (openCards.length < 2 && (!(e.target.classList.contains('deck')))) {
-        moves = moveUp(moves);
-        counter.textContent = Math.floor(moves/2);
-        // Check to make sure the symbol is still hidden. If it is showing, the user
-        // should not be able to turn the card back over on their own.
-        if (!(e.target.classList.contains('back') || (e.target.parentNode.classList.contains('back')))) {
-            let symbol = displaySymbol(e.target);
-            let list = (addSymbol(symbol));
-            console.log(list);
-            // check the length of the list. If it is two, the openCards need to be matched
-            if (list.length == 2) {
-                if (!(isMatch(list))) {
-                    // If the last two cards don't match...
-                    setTimeout(function() {
-                        openCards = notMatch(list);
-                    }, 750);
-                } else {
-                    openCards = [];
-                    if (lockedCards.length == 16) {
-                        setTimeout(winner, 750);
+    // Prevent matching cards from automatically being revealed on dblclick
+    if(e.detail > 1){
+         return false;
+    } else {
+        if (openCards.length < 2 && (!(e.target.classList.contains('deck')))) {
+            moves = moveUp(moves);
+            counter.textContent = Math.floor(moves/2);
+            // Check to make sure the symbol is still hidden. If it is showing, the user
+            // should not be able to turn the card back over on their own.
+            if (!(e.target.classList.contains('back') || (e.target.parentNode.classList.contains('back')))) {
+                let symbol = displaySymbol(e.target);
+                let list = (addSymbol(symbol));
+                console.log(list);
+                // check the length of the list. If it is two, the openCards need to be matched
+                if (list.length == 2) {
+                    if (!(isMatch(list))) {
+                        // If the last two cards don't match...
+                        setTimeout(function() {
+                            openCards = notMatch(list);
+                        }, 750);
+                    } else {
+                        openCards = [];
+                        if (lockedCards.length == 16) {
+                            setTimeout(winner, 750);
+                        }
                     }
                 }
             }
