@@ -62,7 +62,13 @@ let x = setInterval(function() {
     
     document.querySelector('.timer').innerHTML = `${minutes} min, ${seconds} sec`;
     
-}, 1000)
+}, 1000);
+
+function timerStop() {
+    let stopTime = document.querySelector('.timer').innerHTML;
+    clearInterval(x);
+    return stopTime;
+}
 
 
 /*
@@ -167,12 +173,16 @@ function moveUp(moves) {
 }
 
 function winner(){
-    let modalMessage = `You won!
+    let stop = timerStop();
+    let modalMessage = `<h1>You won!
     
-    Your Stats:
-    ${Math.floor(moves/2)} moves`;
-    modal.querySelector('h1').innerText = modalMessage;
-    modalMessage += 
+    Your Stats:</h1>
+    <h3>${Math.floor(moves/2)} moves
+    ${stop}</h3>`;
+    let modalClose = document.getElementById('modal-close');
+    modalClose.insertAdjacentHTML('afterend', modalMessage);
+    // modal.querySelector('h1').innerText = modalMessage;
+    // modalMessage += 
     modal.classList.toggle("show-modal");
     closeButton.addEventListener("click", function(event) {
         modal.classList.remove('show-modal');
