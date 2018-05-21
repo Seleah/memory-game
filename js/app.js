@@ -174,15 +174,13 @@ function moveUp(moves) {
 
 function winner(){
     let stop = timerStop();
-    let modalMessage = `<h1>You won!
+    let modalMessage = `You won!
     
-    Your Stats:</h1>
-    <h3>${Math.floor(moves/2)} moves
-    ${stop}</h3>`;
-    let modalClose = document.getElementById('modal-close');
-    modalClose.insertAdjacentHTML('afterend', modalMessage);
-    // modal.querySelector('h1').innerText = modalMessage;
-    // modalMessage += 
+    Your Stats:`;
+    let gameStats = `${Math.floor(moves/2)} moves
+    ${stop}`;
+    modal.querySelector('h1').innerText = modalMessage;
+    modal.querySelector('h2').innerText = gameStats;
     modal.classList.toggle("show-modal");
     closeButton.addEventListener("click", function(event) {
         modal.classList.remove('show-modal');
