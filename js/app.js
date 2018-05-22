@@ -30,7 +30,6 @@ function displayRandomCards() {
     }
     
     cardDeck.innerHTML = shuffle(cardsArray).join('');
-    let start = timerStart();
     
 }
 
@@ -45,8 +44,6 @@ function shuffle(array) {
         array[currentIndex] = array[randomIndex];
         array[randomIndex] = temporaryValue;
     }
-
-    // console.log(array);
     
     return array;
 }
@@ -71,23 +68,6 @@ function startNewGame() {
     let x = setInterval(timer, 1000);
     return x;
 }
-
-// startNewGame();
-
-// displayRandomCards(cardsList);
-
-// let start = timerStart();
-
-// let x = setInterval(function() {
-//     let now = new Date().getTime();
-//     let timePassed = now - start;
-    
-//     let minutes = Math.floor((timePassed % (1000 * 60 * 60))/ (1000 * 60));
-//     let seconds = Math.floor((timePassed % (1000 * 60))/ 1000);
-    
-//     document.querySelector('.timer').innerHTML = `${minutes} min, ${seconds} sec`;
-    
-// }, 1000);
 
 function timerStop(interId) {
 	console.log('timerStop called');
@@ -117,10 +97,11 @@ function timerStop(interId) {
  *      
  *    + Increment the move counter and display it on the page (put this 
  *      functionality in another function that you call from this one)
-  --------------------------------------Done----------------------------------
  *      
  *    + If all cards have matched, display a message with the final score 
  *      (put this functionality in another function that you call from this one)
+ *
+ * --------------------------------------Done----------------------------------
  */
 
 let deck = document.body.querySelector('.deck');
@@ -166,7 +147,6 @@ function isMatch(list) {
                 element.parentNode.classList.add('match');
                 element.parentNode.parentNode.classList.add('flipped-lock');
                 lockedCards.push(newCard);
-                // console.log(lockedCards);
             });
             return lockedCards;
         }
@@ -201,8 +181,6 @@ function moveUp(moves) {
     } else if (moves == 60) {
         starLess();
     }
-    // console.log('moves:', moves);
-    // console.log(counter.textContent);
     return moves;
 }
 
@@ -270,21 +248,3 @@ restart.addEventListener('click', function(event) {
     timerStop();
     interId = startNewGame();
 });
-
-// -----------------------------------------------------------------------------
-
-
-
-
-
-
-// let interId = startNewTimer();
-
-// let restart = document.querySelector('.reset-timer');
-
-// restart.addEventListener('click', function(event) {
-// 	console.log(interId);
-// 	clearInterval(interId);
-//     timerStop();
-//     interId = startNewTimer(false);
-// });
