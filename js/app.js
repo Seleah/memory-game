@@ -8,6 +8,7 @@ let moves = 0;
 let modal = document.querySelector(".modal");
 let closeButton = document.querySelector(".close-button");
 let starsList = document.querySelector(".stars");
+console.log(starsList.innerHTML);
 
 counter.textContent = moves;
 
@@ -242,9 +243,17 @@ let interId = startNewGame();
 
 let restart = document.querySelector('.restart');
 
-restart.addEventListener('click', function(event) {
-	console.log(interId);
+function restartGame() {
+    console.log(interId);
 	clearInterval(interId);
     timerStop();
     interId = startNewGame();
-});
+    moves = 0;
+    counter.textContent = moves;
+    starsList.innerHTML = 
+    `<li><i class="fa fa-star"></i></li>
+    <li><i class="fa fa-star"></i></li>
+    <li><i class="fa fa-star"></i></li>`;
+}
+
+restart.addEventListener('click', restartGame);
