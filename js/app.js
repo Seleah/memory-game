@@ -30,6 +30,7 @@ function displayRandomCards() {
     }
     
     cardDeck.innerHTML = shuffle(cardsArray).join('');
+    let start = timerStart();
     
 }
 
@@ -50,24 +51,48 @@ function shuffle(array) {
     return array;
 }
 
-displayRandomCards(cardsList);
-
-let startTime = timerStart();
-
-let x = setInterval(function() {
-    let now = new Date().getTime();
-    let timePassed = now - startTime;
+function startNewGame() {
+    displayRandomCards(cardsList);
     
-    let minutes = Math.floor((timePassed % (1000 * 60 * 60))/ (1000 * 60));
-    let seconds = Math.floor((timePassed % (1000 * 60))/ 1000);
+    document.querySelector('.timer').innerHTML = '0 min, 0 sec';
     
-    document.querySelector('.timer').innerHTML = `${minutes} min, ${seconds} sec`;
-    
-}, 1000);
+    let start = timerStart();
+	
+	function timer() {
+		let now = new Date().getTime();
+		let timePassed = now - start;
 
-function timerStop() {
+		let minutes = Math.floor((timePassed % (1000 * 60 * 60))/ (1000 * 60));
+		let seconds = Math.floor((timePassed % (1000 * 60))/ 1000);
+
+		document.querySelector('.timer').innerHTML = `${minutes} min, ${seconds} sec`;
+	}
+    
+    let x = setInterval(timer, 1000);
+    return x;
+}
+
+// startNewGame();
+
+// displayRandomCards(cardsList);
+
+// let start = timerStart();
+
+// let x = setInterval(function() {
+//     let now = new Date().getTime();
+//     let timePassed = now - start;
+    
+//     let minutes = Math.floor((timePassed % (1000 * 60 * 60))/ (1000 * 60));
+//     let seconds = Math.floor((timePassed % (1000 * 60))/ 1000);
+    
+//     document.querySelector('.timer').innerHTML = `${minutes} min, ${seconds} sec`;
+    
+// }, 1000);
+
+function timerStop(interId) {
+	console.log('timerStop called');
     let stopTime = document.querySelector('.timer').innerHTML;
-    clearInterval(x);
+    clearInterval(interId);
     return stopTime;
 }
 
@@ -116,6 +141,7 @@ function displaySymbol(elementClicked) {
 }
 
 function timerStart() {
+    console.log('timerStart called');
     let start = new Date().getTime();
     return start;
 }
@@ -234,11 +260,31 @@ deck.addEventListener('click', function(e) {
     }
 });
 
+let interId = startNewGame();
+
 let restart = document.querySelector('.restart');
 
-restart.addEventListener('click', function() {
-    displayRandomCards(cardsList);
-    let startTime = timerStart();
-    moves = 0;
-    return startTime, moves;
+restart.addEventListener('click', function(event) {
+	console.log(interId);
+	clearInterval(interId);
+    timerStop();
+    interId = startNewGame();
 });
+
+// -----------------------------------------------------------------------------
+
+
+
+
+
+
+// let interId = startNewTimer();
+
+// let restart = document.querySelector('.reset-timer');
+
+// restart.addEventListener('click', function(event) {
+// 	console.log(interId);
+// 	clearInterval(interId);
+//     timerStop();
+//     interId = startNewTimer(false);
+// });
