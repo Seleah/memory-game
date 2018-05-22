@@ -212,7 +212,7 @@ function starLess() {
 }
 
 function winner(){
-    let stop = timerStop();
+    let stop = timerStop(interId);
     let modalMessage = `You won!
     
     Your Stats:`;
