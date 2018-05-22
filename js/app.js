@@ -7,6 +7,7 @@ let counter = document.getElementById('move-counter');
 let moves = 0;
 let modal = document.querySelector(".modal");
 let closeButton = document.querySelector(".close-button");
+let starsList = document.querySelector(".stars");
 
 counter.textContent = moves;
 
@@ -44,7 +45,7 @@ function shuffle(array) {
         array[randomIndex] = temporaryValue;
     }
 
-    console.log(array);
+    // console.log(array);
     
     return array;
 }
@@ -109,7 +110,7 @@ function displaySymbol(elementClicked) {
         card.classList.add('flipped');
         let symbol = elementClicked.nextElementSibling.firstElementChild;
         let icon = ('.' + symbol.classList[1]);
-        console.log('displaySymbol ran');
+        // console.log('displaySymbol ran');
         return icon;
     }
 }
@@ -122,7 +123,7 @@ function timerStart() {
 function addSymbol(icon) {
     
     openCards.push(icon);
-    console.log('addSymbol ran');
+    // console.log('addSymbol ran');
     return openCards;
 }
 
@@ -139,7 +140,7 @@ function isMatch(list) {
                 element.parentNode.classList.add('match');
                 element.parentNode.parentNode.classList.add('flipped-lock');
                 lockedCards.push(newCard);
-                console.log(lockedCards);
+                // console.log(lockedCards);
             });
             return lockedCards;
         }
@@ -148,7 +149,7 @@ function isMatch(list) {
 }
 
 function notMatch(list) {
-    console.log('notMatch called');
+    // console.log('notMatch called');
     // iterate through "list" (openCards)
     for (let j in list) {
         // look for all cards in the deck with the symbol of this item in openCards
@@ -167,9 +168,21 @@ function moveUp(moves) {
     console.log('moveUp called');
     let counter = document.querySelector('.moves');
     moves++;
-    console.log('moves:', moves);
-    console.log(counter.textContent);
+    if (moves == 32) {
+        starLess();
+    } else if (moves == 50) {
+        starLess();
+    } else if (moves == 60) {
+        starLess();
+    }
+    // console.log('moves:', moves);
+    // console.log(counter.textContent);
     return moves;
+}
+
+function starLess() {
+    let byeStar = starsList.lastElementChild;
+    byeStar.remove();
 }
 
 function winner(){
@@ -187,7 +200,6 @@ function winner(){
     });
 }
 
-
 deck.addEventListener('click', function(e) {
     console.log('eventListener triggered');
     // Prevent matching cards from automatically being revealed on dblclick
@@ -202,7 +214,7 @@ deck.addEventListener('click', function(e) {
             if (!(e.target.classList.contains('back') || (e.target.parentNode.classList.contains('back')))) {
                 let symbol = displaySymbol(e.target);
                 let list = (addSymbol(symbol));
-                console.log(list);
+                // console.log(list);
                 // check the length of the list. If it is two, the openCards need to be matched
                 if (list.length == 2) {
                     if (!(isMatch(list))) {
@@ -220,4 +232,13 @@ deck.addEventListener('click', function(e) {
             }
         }
     }
+});
+
+let restart = document.querySelector('.restart');
+
+restart.addEventListener('click', function() {
+    displayRandomCards(cardsList);
+    let startTime = timerStart();
+    moves = 0;
+    return startTime, moves;
 });
