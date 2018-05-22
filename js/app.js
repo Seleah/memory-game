@@ -8,6 +8,8 @@ let moves = 0;
 let modal = document.querySelector(".modal");
 let closeButton = document.querySelector(".close-button");
 let starsList = document.querySelector(".stars");
+let restart = document.querySelector('.restart');
+let modalRestart = document.querySelector('.modal-restart');
 console.log(starsList.innerHTML);
 
 counter.textContent = moves;
@@ -241,8 +243,6 @@ deck.addEventListener('click', function(e) {
 
 let interId = startNewGame();
 
-let restart = document.querySelector('.restart');
-
 function restartGame() {
     console.log(interId);
 	clearInterval(interId);
@@ -257,3 +257,8 @@ function restartGame() {
 }
 
 restart.addEventListener('click', restartGame);
+
+modalRestart.addEventListener('click', function() {
+    modal.classList.remove('show-modal');
+    restartGame();
+});
