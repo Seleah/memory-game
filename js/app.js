@@ -230,6 +230,7 @@ deck.addEventListener('click', function(e) {
                             openCards = notMatch(list);
                         }, 750);
                     } else {
+                        console.log(lockedCards);
                         openCards = [];
                         if (lockedCards.length == 16) {
                             setTimeout(winner, 750);
@@ -245,6 +246,7 @@ let interId = startNewGame();
 
 function restartGame() {
     console.log(interId);
+    lockedCards = [];
 	clearInterval(interId);
     timerStop();
     interId = startNewGame();
@@ -254,11 +256,16 @@ function restartGame() {
     `<li><i class="fa fa-star"></i></li>
     <li><i class="fa fa-star"></i></li>
     <li><i class="fa fa-star"></i></li>`;
+    return lockedCards;
 }
 
-restart.addEventListener('click', restartGame);
+restart.addEventListener('click', function() {
+    lockedCards = restartGame();
+    return lockedCards;
+});
 
 modalRestart.addEventListener('click', function() {
     modal.classList.remove('show-modal');
-    restartGame();
+    lockedCards = restartGame();
+    return lockedCards;
 });
