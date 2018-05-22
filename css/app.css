@@ -181,7 +181,18 @@ h1 {
 }
 
 .close-button:hover {
-	background-color: darkgray;
+	background-color: lightgray;
+}
+
+.modal-restart {
+    width: 25%;
+    margin: auto;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.modal-restart:hover {
+    background-color: lightgray
 }
 
 .show-modal {
