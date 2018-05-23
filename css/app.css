@@ -23,7 +23,7 @@ body {
 }
 
 header {
-    font-size: 2em;
+    font-size: 1em;
 }
 
 .container {
@@ -43,17 +43,16 @@ h1 {
  */
 
 .deck {
-    width: 660px;
-    min-height: 680px;
+    width: 90%;
+    padding: 4%;
     background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
-    padding: 32px;
     border-radius: 10px;
     box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    margin: 0 0 3em;
+    margin: 5%;
 }
 
 .deck-container {
@@ -71,8 +70,9 @@ h1 {
 }
 
 .card {
-    height: 125px;
-    width: 125px;
+    height: 50px;
+    width: 18vw;
+    margin: 1.5% auto;
     transform-style: preserve-3d;
     transition: transform 1s ease-in-out;
     border-radius: 6px;
@@ -119,7 +119,7 @@ h1 {
  */
 
 .score-panel {
-    font-size: 2em;
+    font-size: 0.75em;
     text-align: center;
     width: 100%;
     margin-bottom: 10px;
@@ -221,4 +221,67 @@ h1 {
 	visibility: visible;
 	transform: scale(1.0);
 	transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+}
+
+/*
+ *
+ * Breakpoints
+ *
+ */
+ 
+/* Breakpoint - 300px */
+
+@media screen and (min-width: 300px) {
+    .card {
+        height: 65px;
+    }
+}
+
+/* Breakpoint - 400px */
+
+@media screen and (min-width: 400px) {
+    .card {
+        height: 85px;
+    }
+    
+    header {
+        font-size: 1.3em;
+    }
+    
+    .score-panel {
+        font-size: 1em;
+    }
+}
+
+/* Breakpoint - 575px */
+
+@media screen and (min-width: 575px) {
+    .card {
+        height: 110px;
+    }
+}
+
+/* Major Breakpoint - 700px */
+
+@media screen and (min-width: 700px) {
+    header {
+        font-size: 2em;
+    }
+    
+    .score-panel {
+        font-size: 1.3em;
+    }
+    
+    .deck {
+        width: 660px;
+        min-height: 680px;
+        padding: 32px;
+        margin: 0 0 3em;
+    }
+    
+    .card {
+        height: 125px;
+        width: 125px;
+    }
+    
 }
