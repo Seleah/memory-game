@@ -175,7 +175,6 @@ function notMatch(list) {
 
 function moveUp(moves) {
     console.log('moveUp called');
-    let counter = document.querySelector('.moves');
     moves++;
     if (moves == 32) {
         starLess();
