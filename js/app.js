@@ -10,7 +10,6 @@ let closeButton = document.querySelector(".close-button");
 let starsList = document.querySelector(".stars");
 let restart = document.querySelector('.restart');
 let modalRestart = document.querySelector('.modal-restart');
-console.log(starsList.innerHTML);
 
 counter.textContent = moves;
 
@@ -73,7 +72,6 @@ function startNewGame() {
 }
 
 function timerStop(interId) {
-	console.log('timerStop called');
     let stopTime = document.querySelector('.timer').innerHTML;
     clearInterval(interId);
     return stopTime;
@@ -119,13 +117,11 @@ function displaySymbol(elementClicked) {
         card.classList.add('flipped');
         let symbol = elementClicked.nextElementSibling.firstElementChild;
         let icon = ('.' + symbol.classList[1]);
-        // console.log('displaySymbol ran');
         return icon;
     }
 }
 
 function timerStart() {
-    console.log('timerStart called');
     let start = new Date().getTime();
     return start;
 }
@@ -133,7 +129,6 @@ function timerStart() {
 function addSymbol(icon) {
     
     openCards.push(icon);
-    // console.log('addSymbol ran');
     return openCards;
 }
 
@@ -158,7 +153,6 @@ function isMatch(list) {
 }
 
 function notMatch(list) {
-    // console.log('notMatch called');
     // iterate through "list" (openCards)
     for (let j in list) {
         // look for all cards in the deck with the symbol of this item in openCards
@@ -174,7 +168,6 @@ function notMatch(list) {
 }
 
 function moveUp(moves) {
-    console.log('moveUp called');
     moves++;
     if (moves == 32) {
         starLess();
@@ -207,7 +200,6 @@ function winner(){
 }
 
 deck.addEventListener('click', function(e) {
-    console.log('eventListener triggered');
     // Prevent matching cards from automatically being revealed on dblclick
     if(e.detail > 1){
          return false;
@@ -220,7 +212,6 @@ deck.addEventListener('click', function(e) {
             if (!(e.target.classList.contains('back') || (e.target.parentNode.classList.contains('back')))) {
                 let symbol = displaySymbol(e.target);
                 let list = (addSymbol(symbol));
-                // console.log(list);
                 // check the length of the list. If it is two, the openCards need to be matched
                 if (list.length == 2) {
                     if (!(isMatch(list))) {
@@ -229,7 +220,6 @@ deck.addEventListener('click', function(e) {
                             openCards = notMatch(list);
                         }, 750);
                     } else {
-                        console.log(lockedCards);
                         openCards = [];
                         if (lockedCards.length == 16) {
                             setTimeout(winner, 750);
@@ -244,7 +234,6 @@ deck.addEventListener('click', function(e) {
 let interId = startNewGame();
 
 function restartGame() {
-    console.log(interId);
     lockedCards = [];
 	clearInterval(interId);
     timerStop();
