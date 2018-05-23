@@ -20,7 +20,10 @@ counter.textContent = moves;
  *   - add each card's HTML to the page
  */
 function displayRandomCards() {
-    
+    /* Creates an array from the cards in the deck and uses a call to shuffle()
+     * to randomly arrange the cards
+     */
+     
     let cardsArray = [];
     var tmpElement = document.createElement("div");
     
@@ -37,6 +40,9 @@ function displayRandomCards() {
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
+    /* Randomly reorders the cards in array
+     */
+     
     var currentIndex = array.length, temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
@@ -51,6 +57,9 @@ function shuffle(array) {
 }
 
 function startNewGame() {
+    /* Randomly rearranges the cards, starts the timer
+     */
+     
     displayRandomCards(cardsList);
     
     document.querySelector('.timer').innerHTML = '0 min, 0 sec';
@@ -58,6 +67,9 @@ function startNewGame() {
     let start = timerStart();
 	
 	function timer() {
+	    /* Calculate the time that has passed
+	     */
+	     
 		let now = new Date().getTime();
 		let timePassed = now - start;
 
@@ -72,6 +84,9 @@ function startNewGame() {
 }
 
 function timerStop(interId) {
+    /* Stops the timer
+     */
+     
     let stopTime = document.querySelector('.timer').innerHTML;
     clearInterval(interId);
     return stopTime;
@@ -110,6 +125,9 @@ let openCards = [];
 let lockedCards = [];
 
 function displaySymbol(elementClicked) {
+    /* Flips the card over if clicked while symbol is hidden
+     */
+    
     // make sure you're only flipping a card, nothing else
     // (apparently it's possible to flip the entire game...)
     if (elementClicked.classList.contains('side')) {
@@ -122,18 +140,26 @@ function displaySymbol(elementClicked) {
 }
 
 function timerStart() {
+    /* starts the timer
+     */
+    
     let start = new Date().getTime();
     return start;
 }
 
 function addSymbol(icon) {
-    
+    /* Adds the recently revealed symbol to openCards to be matched
+     */
+     
     openCards.push(icon);
     return openCards;
 }
 
 function isMatch(list) {
-    // Isolate the last card in the list. It is the most recent
+    /* Checks to see if any cards in list are matches
+     * Isolate the last card in the list. It is the most recent
+     */
+    
     let newCard = list.slice(-1)[0];
     // check to see if a similar card has already been revealed
     for (let i in list.slice(0, -1)){
@@ -153,7 +179,10 @@ function isMatch(list) {
 }
 
 function notMatch(list) {
-    // iterate through "list" (openCards)
+    /* Resets openCards to be an empty array and flips the unmatched cards over
+     * again iterate through "list" (openCards)
+     */
+     
     for (let j in list) {
         // look for all cards in the deck with the symbol of this item in openCards
         let hideCards = document.querySelectorAll(list[j]);
@@ -168,6 +197,10 @@ function notMatch(list) {
 }
 
 function moveUp(moves) {
+    /* Increments the move counter and checks to see if the user has made a
+     * certain number of moves. If so, remove a star from their rating.
+     */
+     
     moves++;
     if (moves == 32) {
         starLess();
@@ -178,11 +211,18 @@ function moveUp(moves) {
 }
 
 function starLess() {
+    /* Remove a star from the user's rating
+     */
+     
     let byeStar = starsList.lastElementChild;
     byeStar.remove();
 }
 
 function winner(){
+    /* When the user wins, display a congratulations message and the stats,
+     * along with a replay button
+     */
+     
     let stop = timerStop(interId);
     let stars = starsList.innerHTML;
     let modalMessage = `You won!
@@ -200,6 +240,13 @@ function winner(){
 }
 
 deck.addEventListener('click', function(e) {
+    /* When the user clicks on a card, reveal the card and if two are revealed,
+     * check if they are a match. If not, flip them back over. If so, lock them
+     * in the flipped position and add them to a list of matched cards. Once the
+     * user has matched all of the cards, tell them they won and tell them how
+     * they did
+     */
+     
     // Prevent matching cards from automatically being revealed on dblclick
     if(e.detail > 1){
          return false;
@@ -234,6 +281,10 @@ deck.addEventListener('click', function(e) {
 let interId = startNewGame();
 
 function restartGame() {
+    /* Rearrange the cards, restart the timer, reset the moves counter, empty
+     * the list of matched cards and reset the star rating
+     */
+     
     lockedCards = [];
 	clearInterval(interId);
     timerStop();
@@ -248,11 +299,17 @@ function restartGame() {
 }
 
 restart.addEventListener('click', function() {
+    /* If the restart button is clicked, restart the game
+     */
+    
     lockedCards = restartGame();
     return lockedCards;
 });
 
 modalRestart.addEventListener('click', function() {
+    /* If the user wins the game and decides to play again, restart the game
+     */
+    
     modal.classList.remove('show-modal');
     lockedCards = restartGame();
     return lockedCards;
