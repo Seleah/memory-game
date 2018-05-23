@@ -181,8 +181,6 @@ function moveUp(moves) {
         starLess();
     } else if (moves == 50) {
         starLess();
-    } else if (moves == 60) {
-        starLess();
     }
     return moves;
 }
