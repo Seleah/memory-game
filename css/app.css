@@ -22,6 +22,10 @@ body {
     font-size: 1em;
 }
 
+header {
+    font-size: 2em;
+}
+
 .container {
     display: flex;
     justify-content: center;
@@ -115,6 +119,7 @@ h1 {
  */
 
 .score-panel {
+    font-size: 2em;
     text-align: center;
     width: 100%;
     margin-bottom: 10px;
@@ -216,21 +221,4 @@ h1 {
 	visibility: visible;
 	transform: scale(1.0);
 	transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
-}
-
-/*
- *
- * Breakpoint: 600px
- *
- */
-
-@media screen and (min-width: 300px) { 
-    header {
-        font-size: 2em;
-    }
-    
-    .score-panel {
-        font-size: 2em;
-        width: 100%;
-    }
 }
