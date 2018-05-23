@@ -166,7 +166,7 @@ h1 {
 }
 
 .modal-content {
-    font-size: 1.75em;
+    font-size: 0.75em;
 	position: absolute;
 	text-align: center;
 	top: 50%;
@@ -174,18 +174,17 @@ h1 {
 	transform: translate(-50%, -50%);
 	background-color: white;
 	padding: 1rem 1.5rem;
-	width: 30rem;
+	width: 85%;
 	border-radius: 0.5rem;
 }
 
 .close-button {
-	float: right;
-	width: 2.5rem;
-	line-height: 2.5rem;
+	font-size: 2em;
+	width: 40px;
+	line-height: 40px;
 	text-align: center;
 	cursor: pointer;
 	border-radius: 0.25rem;
-	background-color: lightgray;
 }
 
 .final-star {
@@ -197,11 +196,8 @@ h1 {
     display: inline-block;
 }
 
-.close-button:hover {
-	background-color: lightgray;
-}
-
 .modal-restart {
+    text-align: center;
     width: 45%;
     margin: auto;
     cursor: pointer;
@@ -251,6 +247,11 @@ h1 {
     .score-panel {
         font-size: 1em;
     }
+    
+    .modal-content {
+        width: 75%;
+        font-size: 1em;
+    }
 }
 
 /* Breakpoint - 575px */
@@ -258,6 +259,18 @@ h1 {
 @media screen and (min-width: 575px) {
     .card {
         height: 110px;
+    }
+    
+    .modal-content {
+        width: 65%;
+    }
+    
+    .close-button {
+        float: right;
+    }
+    
+    .close-button:hover {
+    	background-color: lightgray;
     }
 }
 
@@ -284,4 +297,7 @@ h1 {
         width: 125px;
     }
     
+    .modal-content {
+        width: 400px;
+    }
 }
