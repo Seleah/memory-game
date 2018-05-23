@@ -194,12 +194,14 @@ function starLess() {
 
 function winner(){
     let stop = timerStop(interId);
+    let stars = starsList.innerHTML;
     let modalMessage = `You won!
     
     Your Stats:`;
     let gameStats = `${Math.floor(moves/2)} moves
     ${stop}`;
     modal.querySelector('h1').innerText = modalMessage;
+    modal.querySelector('.final-star').innerHTML = stars;
     modal.querySelector('h2').innerText = gameStats;
     modal.classList.toggle("show-modal");
     closeButton.addEventListener("click", function(event) {
