@@ -11,11 +11,15 @@ along with the use of `addEventListener` and `setInterval`
 
 Note: **_This game may not work on iOS_**
 
-Here is the link:
+[Play here!](https://seleah.github.io/memory-game/ "Click to play!")
 
-https://seleah.github.io/memory-game/
+## External Resources
 
-## Play with it!
+
+* Bootstrap
+* Google font (Coda)
+
+## Play With It!
 
 
 Play the game! Test the reset buttons and most of all... WIN.
